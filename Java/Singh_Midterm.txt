@@ -1,0 +1,173 @@
+//
+//  Created by Mandeep Singh on 05/14/18.
+//  Copyright © 2018 Mandeep Singh. All rights  .
+//
+//Problem 1
+
+import java.util.Scanner;
+public class MidtermProblem1 {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        
+        int courses = 1;
+        int units= 0;
+        int totalUnits = 0;
+        int gradePoints;
+        int grade; 
+        int totalGradePoints= 0;
+        
+        while(units != -1)
+        {
+            System.out.printf("Enter course %d units(-1 to exit): ", courses);
+           units= input.nextInt();
+            if(units != -1)
+            {
+             
+            totalUnits = units + totalUnits;  
+            
+            System.out.printf("Enter grade point (A-4.0, B-3.0, C-2.0, D-1.0, F-0.0): ");
+            gradePoints = input.nextInt();
+            grade = gradePoints * units;
+            totalGradePoints = totalGradePoints + grade;
+            
+            courses++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        double GPA = totalGradePoints / totalUnits;
+        
+        if(courses == 1)
+        {
+            System.out.printf("No Courses Entered\n");
+        }
+        
+        if(courses != 1)
+        {
+            System.out.printf("\nTotal Number of Courses:%d     Total Units:%d     Total Grade Points:%d     GPA:%.2f\n", 
+                    courses - 1, totalUnits, totalGradePoints, GPA);
+        }       
+    }  
+}
+
+/*
+OUTPUT:
+
+Enter course 1 units(-1 to exit): 4
+Enter grade point (A-4.0, B-3.0, C-2.0, D-1.0, F-0.0): 4
+Enter course 2 units(-1 to exit): 3
+Enter grade point (A-4.0, B-3.0, C-2.0, D-1.0, F-0.0): 4
+Enter course 3 units(-1 to exit): 2
+Enter grade point (A-4.0, B-3.0, C-2.0, D-1.0, F-0.0): 4
+Enter course 4 units(-1 to exit): 1
+Enter grade point (A-4.0, B-3.0, C-2.0, D-1.0, F-0.0): 4
+Enter course 5 units(-1 to exit): -1
+
+Total Number of Courses:4     Total Units:10     Total Grade Points:40     GPA:4.00
+
+Problem 2
+*/
+
+import java.util.Scanner;
+public class MidtermProblem2 {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.printf("Enter number of rows: ");
+        int rows = input.nextInt();
+        System.out.printf("Enter number of columns: ");
+        int columns = input.nextInt();
+      
+        printStarMatrix(rows, columns);
+        
+    }
+    
+    public static void printStarMatrix(int rows, int columns)
+    {
+        String asterisk = "*";
+        for(int a = 0; a < rows; a++) 
+        {
+            System.out.println("");
+            for (int b = 0; b <= columns; b++) 
+            {
+                System.out.print("*");
+            }
+        }
+        System.out.println("");
+    }
+    
+    public static String printBorder(int rows, int columns, String character)
+    {
+        String border = character;
+       
+        return border;
+    }
+}
+
+/*
+OUTPUT:
+
+Enter number of rows: 3
+Enter number of columns: 2
+
+***
+***
+***
+
+Problem 3
+*/
+
+public class MidtermProblem3 {
+    public static void main(String[] args) {
+    
+    int counter1 = 0;
+    int sum = 0;
+    int[] array1 = new int[9];
+    for(int i = 0; i < array1.length; i++) {
+        array1[i] = (int)(Math.random() * 16 + 1);
+        }
+    System.out.printf("Generated numbers are:[ ");
+    
+    while(counter1 < 9)
+    {
+        System.out.print(array1[counter1]);
+        System.out.print(" ");
+        counter1++;
+    }
+    System.out.print("]");
+    
+    for(int j: array1)
+    {
+        sum += j;
+    }
+    
+    double average = sum/9;
+    System.out.printf("\nTotal:%d     Average:%.2f", sum, average);
+    
+    int k = 0;
+    int counter2 = 0;
+    while(k < 9)
+    {
+        if(array1[k] > average)
+        {
+            counter2++;
+        }
+        k++;
+    }
+    System.out.printf("\nNumbers above the average: %d", counter2);
+    
+    int altSum = array1[0] - array1[1] + array1[2] - array1[3] + array1[4] - array1[5] + array1[6] - array1[7] + array1[8];
+    System.out.printf("\nAlternating Sum:%d\n", altSum);
+    }
+}
+
+/*
+OUTPUT:
+
+Generated numbers are:[ 13 3 9 3 10 12 14 6 2 ]
+Total:72     Average:8.00
+Numbers above the average: 5
+Alternating Sum:24
+*/

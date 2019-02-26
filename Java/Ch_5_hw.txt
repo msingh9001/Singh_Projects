@@ -1,0 +1,146 @@
+//
+//  Created by Mandeep Singh on 04/17/18.
+//  Copyright © 2018 Mandeep Singh. All rights  .
+//
+//Chapter 5 HW
+
+//5.12
+
+public class OddIntProduct {
+    public static void main(String[] args) {     
+        int product = 1;
+
+        for (int count = 1; count <= 15; count += 2 )
+        {
+            product *= count;
+        }
+        System.out.printf("%d\n",product);
+    }
+}
+
+/*OUTPUT:
+
+2027025
+
+5.16
+*/
+
+import java.util.Scanner;
+public class LineApplication {
+    public static void main(String[] args) {
+       Scanner input = new Scanner(System.in);
+    
+    int num1= 0;
+    int num2= 0;
+    int num3= 0;
+    int num4= 0;
+    int num5 =0;
+    int number;
+    
+    for (int counter = 1; counter <= 5; counter++) {
+        System.out.println("Enter an Integer:");
+        number = input.nextInt();
+         switch (counter) {
+         case 1:
+             num1 = number;
+             break;
+             
+         case 2:
+             num2 = number;
+             break;
+         case 3:
+             num3 = number;
+             break;
+         case 4:
+             num4 = number;
+             break;
+         case 5:
+             num5 = number;
+             break;
+         }
+        
+    }     
+        
+             for (int asterisk = 1 ; asterisk <= num1; asterisk++) {
+                 System.out.print("*");
+             }
+             System.out.println();
+             for (int asterisk = 1 ; asterisk <= num2; asterisk++) {
+                 System.out.print("*");
+             }
+             System.out.println();
+             for (int asterisk = 1 ; asterisk <= num3; asterisk++) {
+                 System.out.print("*");
+             }
+             System.out.println();
+             for (int asterisk = 1 ; asterisk <= num4; asterisk++) {
+                 System.out.print("*");
+             }
+             System.out.println();
+             for (int asterisk = 1 ; asterisk <= num5; asterisk++) {
+                 System.out.print("*");
+             }
+             System.out.println();
+    }
+}
+
+/*
+OUTPUT
+
+Enter an Integer:
+12
+Enter an Integer:
+15
+Enter an Integer:
+20
+Enter an Integer:
+25
+Enter an Integer:
+30
+************
+***************
+********************
+*************************
+******************************
+
+5.24
+*/
+
+public class DiamondPrintingProgram {
+    public static void main(String[] args) {
+ int size = 9;
+
+    for (int i = 1; i < size; i += 2) {
+        for (int j = size; j >= i; j -= 2) {
+            System.out.print(" ");
+        }
+        for (int k = 1; k <= i; k++) {
+            System.out.print("*");
+        }
+        System.out.println();
+    }
+
+    for (int i = 1; i <= size; i += 2) {
+        for (int j = 1; j <= i; j += 2) {
+            System.out.print(" ");
+        }
+        for (int k = size; k >= i; k--) {
+            System.out.print("*");
+        }
+        System.out.println();
+        }
+    }   
+}
+/*
+OUTPUT:
+
+     *
+    ***
+   *****
+  *******
+ *********
+  *******
+   *****
+    ***
+     *
+*/

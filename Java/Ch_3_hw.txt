@@ -1,0 +1,389 @@
+//
+//  Created by Mandeep Singh on 04/03/18.
+//  Copyright © 2018 Mandeep Singh. All rights  .
+//
+/*CH3 HW Mandeep Singh
+
+3.11
+*/
+Account FILE:
+
+public class Account
+{   
+   private String name; // instance variable 
+   private double balance; // instance variable 
+
+   // Account constructor that receives two parameters  
+   public Account(String name, double balance) 
+   {
+      this.name = name; // assign name to instance variable name
+
+      // validate that the balance is greater than 0.0; if it's not,
+      // instance variable balance keeps its default initial value of 0.0
+      if (balance > 0.0) // if the balance is valid
+         this.balance = balance; // assign it to instance variable balance
+   }
+
+   // method that deposits (adds) only a valid amount to the balance
+   public void deposit(double depositAmount) 
+   {      
+      if (depositAmount > 0.0) // if the depositAmount is valid
+         balance = balance + depositAmount; // add it to the balance 
+   }
+
+   public void withdraw(double withdrawAmount)
+   {
+      if (withdrawAmount > 0.0)
+      {
+       if (balance - withdrawAmount< 0.0)
+        System.out.printf("Withdrawl amount exceeded balance%n");
+           
+       if (balance - withdrawAmount > 0.0)
+        balance = balance - withdrawAmount;
+   }
+   }
+   // method returns the account balance
+   public double getBalance()
+   {
+      return balance; 
+   } 
+
+   // method that sets the name
+   public void setName(String name)
+   {
+      this.name = name; 
+   } 
+
+   // method that returns the name
+   public String getName()
+   {
+      return name; 
+   } 
+} // end class Account
+
+AccountTest FILE:
+
+import java.util.Scanner;
+
+public class AccountTest
+{
+   public static void main(String[] args) 
+   {
+      Account account1 = new Account("Jane Green", 50.00);
+      Account account2 = new Account("John Blue", -7.53); 
+
+      // display initial balance of each object
+      System.out.printf("%s balance: $%.2f%n",
+         account1.getName(), account1.getBalance()); 
+      System.out.printf("%s balance: $%.2f%n%n",
+         account2.getName(), account2.getBalance()); 
+
+      // create a Scanner to obtain input from the command window
+      Scanner input = new Scanner(System.in);
+
+      System.out.print("Enter deposit amount for account1: "); // prompt
+      double depositAmount = input.nextDouble(); // obtain user input
+      System.out.printf("%nadding %.2f to account1 balance%n%n", 
+         depositAmount);
+      account1.deposit(depositAmount); // add to account1's balance
+
+      // display balances
+      System.out.printf("%s balance: $%.2f%n",
+         account1.getName(), account1.getBalance()); 
+      System.out.printf("%s balance: $%.2f%n%n",
+         account2.getName(), account2.getBalance()); 
+
+      System.out.print("Enter deposit amount for account2: "); // prompt
+      depositAmount = input.nextDouble(); // obtain user input
+      System.out.printf("%nadding %.2f to account2 balance%n%n", 
+         depositAmount);
+      account2.deposit(depositAmount); // add to account2 balance
+
+      
+      // display balances
+      System.out.printf("%s balance: $%.2f%n", 
+         account1.getName(), account1.getBalance()); 
+      System.out.printf("%s balance: $%.2f%n%n",
+         account2.getName(), account2.getBalance()); 
+      
+      //Withdraw account1
+      System.out.printf("Enter withdraw amount for account1: ");
+      double withdrawAmount = input.nextDouble();
+      System.out.printf("%nsubtracting %.2f to account1 balance%n%n", withdrawAmount);
+      account1.withdraw(withdrawAmount);
+      
+       // display balances
+      System.out.printf("%s balance: $%.2f%n", 
+         account1.getName(), account1.getBalance()); 
+      System.out.printf("%s balance: $%.2f%n%n",
+         account2.getName(), account2.getBalance()); 
+      
+      //Withdraw account2
+      System.out.printf("Enter withdraw amount for account2: ");
+      withdrawAmount = input.nextDouble();
+      System.out.printf("%nsubtracting %.2f to account2 balance%n%n", withdrawAmount);
+      account2.withdraw(withdrawAmount);
+      
+       // display balances
+      System.out.printf("%s balance: $%.2f%n", 
+         account1.getName(), account1.getBalance()); 
+      System.out.printf("%s balance: $%.2f%n%n",
+         account2.getName(), account2.getBalance()); 
+   } // end main
+} // end class AccountTest
+
+/*OUTPUT:
+
+Jane Green balance: $50.00
+John Blue balance: $0.00
+
+Enter deposit amount for account1: 40
+
+adding 40.00 to account1 balance
+
+Jane Green balance: $90.00
+John Blue balance: $0.00
+
+Enter deposit amount for account2: 50
+
+adding 50.00 to account2 balance
+
+Jane Green balance: $90.00
+John Blue balance: $50.00
+
+Enter withdraw amount for account1: 20
+
+subtracting 20.00 to account1 balance
+
+Jane Green balance: $70.00
+John Blue balance: $50.00
+
+Enter withdraw amount for account2: 70
+
+subtracting 70.00 to account2 balance
+
+Withdrawl amount exceeded balance
+Jane Green balance: $70.00
+John Blue balance: $50.00
+
+
+3.12
+*/
+
+INVOICE:
+
+public class Invoice {
+    public String partNumber;
+    public String partDescription;
+    public int quantity;
+    public double price;
+    
+    public Invoice(String partNumber, String partDescription, int quantity, double price)
+    {
+        this.partNumber = partNumber;
+        this.partDescription = partDescription;
+        this.quantity = quantity;
+
+        if (price > 0)
+        {
+            this.price = price;
+        }
+    }
+    
+    public void setPartNumber(String partNumber)
+   {
+      this.partNumber = partNumber; 
+   } 
+    
+    public String getPartNumber()
+   {
+      return partNumber; 
+   } 
+    
+     public void setPartDescription(String partDescription)
+   {
+      this.partDescription = partDescription; 
+   }  
+    public String getPartDescription()
+   {
+      return partDescription; 
+   } 
+    
+     public void setQuantity(int quantity)
+   {
+      this.quantity = quantity; 
+   } 
+    public int getQuantity()
+   {
+      return quantity; 
+   } 
+    
+     public void setPrice(double price)
+   {
+      this.price = price; 
+   }  
+    public double getPrice()
+   {
+      return price; 
+   }
+   
+    public double getInvoiceAmount()
+    {
+        double invoiceAmount;
+        invoiceAmount = quantity * price;
+        return invoiceAmount;
+    }
+}
+
+InvoiceTest:
+
+import java.util.Scanner;
+
+public class InvoiceTest {
+
+    public static void main(String[] args) {
+        
+        Invoice invoice1 = new Invoice("", "", 0, 0.0);
+        
+        Scanner input = new Scanner(System.in);
+        
+        String partNumber;
+        String partDescription;
+        int quantity;
+        double price;
+        
+        System.out.printf("Enter part number: ");
+        partNumber = input.nextLine();
+        invoice1.setPartNumber(partNumber);
+        
+        System.out.printf("%nEnter part description: ");
+        partDescription = input.nextLine();
+        invoice1.setPartDescription(partDescription);
+        
+        System.out.printf("%nEnter quantity: ");
+        quantity = input.nextInt();
+
+        if (quantity > 0)
+        {
+            invoice1.setQuantity(quantity);
+        }
+        
+        System.out.printf("%nEnter price per part: ");
+        price = input.nextDouble();
+
+        if (price > 0)
+        {
+            invoice1.setPrice(price);
+        }
+        
+        System.out.printf("%n The total price of %d %s %s is $%.2f\n",
+                invoice1.getQuantity(), invoice1.getPartNumber(), invoice1.getPartDescription() ,invoice1.getInvoiceAmount());
+    } 
+}
+
+/*OUTPUT:
+
+Enter part number: S10H0
+
+Enter part description: computer
+
+Enter quantity: 4
+
+Enter price per part: 500
+
+ The total price of 4 S10H0 computer is $2000.00
+
+3.13
+*/
+
+Employee:
+
+public class Employee {
+
+    public static void main(String[] args) {
+        
+        EmployeeTest employee1 = new EmployeeTest("Robert", "Johnson", 2000);
+        EmployeeTest employee2 = new EmployeeTest("Frank", "Hendrickson", 2750);
+        
+        double yearlySalary1 = employee1.getMonthlySalary() * 12;
+        double yearlySalary2 = employee2.getMonthlySalary() * 12;
+        
+        double raise1 = yearlySalary1 * 1.10;
+        double raise2 = yearlySalary2 * 1.10;
+        
+        System.out.printf("%s %s's monthly salary is $%.2f\n", employee1.getFirstName(), employee1.getLastName(),
+                employee1.getMonthlySalary());
+        System.out.printf("%s %s's monthly salary is $%.2f\n", employee2.getFirstName(), employee2.getLastName(),
+                employee2.getMonthlySalary());
+        
+        System.out.printf("%s %s's yearly salary is $%.2f\n", 
+                employee1.getFirstName(), employee1.getLastName(), yearlySalary1);
+        System.out.printf("%s %s's yearly salary is $%.2f\n", 
+                employee1.getFirstName(), employee1.getLastName(), yearlySalary2);
+        
+        System.out.printf("After a 10 percent raise, %s %s's yearly salary is $%.2f\n", 
+                employee1.getFirstName(), employee1.getLastName(), raise1);
+        System.out.printf("After a 10 percent raise, %s %s's yearly salary is $%.2f\n", 
+                employee1.getFirstName(), employee1.getLastName(), raise2);
+    }
+    
+}
+
+EmployeeTest:
+
+public class EmployeeTest {
+    private String firstName;
+    private String lastName;
+    private double monthlySalary;
+    
+    public EmployeeTest(String firstName, String lastName, double monthlySalary)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        
+        if (monthlySalary > 0.0)
+      {
+       this.monthlySalary = monthlySalary; 
+      }
+      if (monthlySalary <= 0.0)
+      {
+          this.monthlySalary = 0.0;
+      }
+    }
+    
+    public void setFirstName(String firstName)
+   {
+      this.firstName = firstName; 
+   } 
+    public String getFirstName()
+   {
+      return firstName; 
+   } 
+    
+    public void setLastName(String lastName)
+   {
+      this.lastName = lastName; 
+   } 
+      public String getLastName()
+   {
+      return lastName; 
+   } 
+      
+      public void setMonthlySalary(double monthlySalary)
+   {
+      this.monthlySalary = monthlySalary;
+   } 
+      public double getMonthlySalary()
+   {
+      return monthlySalary;
+   }  
+}
+/*
+OUTPUT:
+Robert Johnson's monthly salary is $2000.00
+Frank Hendrickson's monthly salary is $2750.00
+Robert Johnson's yearly salary is $24000.00
+Robert Johnson's yearly salary is $33000.00
+After a 10 percent raise, Robert Johnson's yearly salary is $26400.00
+After a 10 percent raise, Robert Johnson's yearly salary is $36300.00
+*/

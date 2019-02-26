@@ -1,0 +1,194 @@
+//
+//  Created by Mandeep Singh on 04/10/18.
+//  Copyright © 2018 Mandeep Singh. All rights  .
+//
+//4.17
+
+import java.util.Scanner;
+public class GasMileage {
+    public static void main(String[] args) {
+     Scanner input = new Scanner(System.in);
+     
+     int miles = 0;
+     int gallons;
+     double localMPG;
+     double totalMPG;
+     double totalMiles = 0;
+     double totalGallons = 0;
+     
+     while(miles != -1)
+     {
+         System.out.printf("Please enter miles: ");
+         miles = input.nextInt();
+         if(miles != -1)
+         {
+             totalMiles += miles;
+             
+             System.out.printf("\nPlease enter gallons: ");
+             gallons = input.nextInt();
+             totalGallons += gallons; 
+             
+             localMPG = miles/gallons;
+             System.out.printf("\nThe MPG for this trip is %.2f\n", localMPG);
+         }
+     }
+     totalMPG = totalMiles/totalGallons;
+     System.out.printf("\nThe total MPG so far is %.2f\n", totalMPG);
+    }
+}
+
+
+/*OUTPUT
+
+Please enter miles: 10
+
+Please enter gallons: 10
+
+The MPG for this trip is 1.00
+Please enter miles: 20
+
+Please enter gallons: 10
+
+The MPG for this trip is 2.00
+Please enter miles: -1
+
+The total MPG so far is 1.50
+
+4.20
+*/
+
+import java.util.Scanner;
+public class SalaryCalculator {
+    public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    
+    int ask= 1;
+    int employeeNumber = 0;
+
+    while(ask != 0)
+        {
+        int hoursWorked;
+        double hourlyWage; 
+        
+        System.out.println("Please enter number of hours worked: ");
+        hoursWorked = input.nextInt();
+        System.out.println("Please enter hourly wage: ");
+        hourlyWage = input.nextInt();
+        
+        double grossPay;
+        int overtime;
+        double overtimeWage;
+        
+        if(hoursWorked > 40)
+            {
+            overtime = hoursWorked - 40;
+            overtimeWage = hourlyWage * 1.5;
+            grossPay = (40 * hourlyWage) + (overtime * overtimeWage);
+            }
+        else
+        {
+            grossPay = hoursWorked * hourlyWage;
+        }
+        
+        System.out.printf("Employee%d's gross pay is $%.2f\n", ++employeeNumber, grossPay);
+        System.out.println("Would you like to calculate the next employee's data?(1 yes or 0 no): ");
+        ask = input.nextInt();
+        }
+    } 
+}
+
+/*OUTPUT
+Please enter number of hours worked: 
+10
+Please enter hourly wage: 
+15
+Employee1's gross pay is $150.00
+Would you like to calculate the next employee's data?(1 yes or 0 no): 
+1
+Please enter number of hours worked: 
+50
+Please enter hourly wage: 
+15
+Employee2's gross pay is $825.00
+Would you like to calculate the next employee's data?(1 yes or 0 no): 
+0
+
+4.21
+*/
+
+import java.util.Scanner;
+public class LargestNumber {
+    public static void main(String[] args) {
+        int number;
+        int largest = 0;
+        int saleFigure = 1;
+        
+        Scanner input = new Scanner(System.in);
+        
+        int counter = 0;
+        while(counter < 10)
+        {
+            System.out.printf("\nPlease enter sale figure%d: ", saleFigure);
+            number = input.nextInt();
+            
+            if(number > largest)
+            {
+            largest = number;
+            }
+            counter++;
+            saleFigure++;
+        }
+        System.out.printf("\nThe largest number is %d\n", largest);
+    }
+}
+/*
+OUTPUT
+
+Please enter sale figure1: 1
+
+Please enter sale figure2: 2
+
+Please enter sale figure3: 3
+
+Please enter sale figure4: 4
+
+Please enter sale figure5: 5
+
+Please enter sale figure6: 6
+
+Please enter sale figure7: 7
+
+Please enter sale figure8: 8
+
+Please enter sale figure9: 9
+
+Please enter sale figure10: 10
+
+The largest number is 10
+
+4.22
+*/
+
+public class Example {
+    public static void main(String[] args) {
+        
+        int n = 0;
+        
+        System.out.printf("N    10*N   100*N   1000*N\n");
+        
+        while(n < 5)
+                {
+                 n++; 
+                System.out.printf("%d    %d     %d     %d\n", n, 10*n, 100*n, 1000*n); 
+                }
+    }  
+}
+/*
+OUTPUT:
+N    10*N   100*N   1000*N
+1    10     100     1000
+2    20     200     2000
+3    30     300     3000
+4    40     400     4000
+5    50     500     5000
+*/

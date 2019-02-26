@@ -1,0 +1,243 @@
+//
+//  Created by Mandeep Singh on 05/03/18.
+//  Copyright © 2018 Mandeep Singh. All rights  .
+//
+//CHAPTER 8
+
+//8.4
+
+Rectangle:
+package test_rectangle;
+public class Rectangle {
+    private double length ;
+    private double width ;
+
+    public void setLength( double length)
+    {
+        if (length < 0 || length > 20)
+        {
+            throw new IllegalArgumentException("For input length:0.0");
+        }
+        this.length = length;
+    }
+    public void setWidth(double width)
+    {
+    if ( width <0 || width > 20)
+    {
+        throw new IllegalArgumentException("For input width:0.0");
+    }
+    this.width = width;
+    }
+     
+    public double getLength()
+    {
+    return length;
+    } 
+     
+         
+    public double getWidth()
+    {
+    return width;
+    } 
+         
+    public double getPerimeter()
+    {
+        return (length + width)*2 ;
+    }
+       
+    public double getArea()
+    {
+        return length * width ;
+    }
+       
+    public String Calculations1() {
+   	 return String.format("%n%.2f is the perimeter %n%.2f is the area",
+         getPerimeter(), getArea());
+                                     }
+    public String Calculations() {
+   	 return String.format("%.2f is the length %n%.2f is the width %n%.2f is the perimeter %n%.2f is the area%n",
+         getLength(), getWidth(),getPerimeter(), getArea());
+                                 }
+}
+
+Test_Rectangle:
+
+package test_rectangle;
+import java.util.Scanner;
+public class Test_Rectangle {
+    public static void main(String[] args) {
+         Scanner input = new Scanner(System.in);
+         
+   	 Rectangle test_rectangle = new Rectangle();
+   	 
+   	 System.out.printf("%s",test_rectangle.Calculations());
+   	 
+   	 int count = 1;
+   	 
+   	 while(count !=3) {
+   		 System.out.println("1) Enter 1 to Input Length");
+   		 System.out.println("2) Enter 2 to Input Width");
+   		 System.out.println("3) Enter 3 to Exit");
+   		 
+   		 count = input.nextInt();
+   		 
+   		 if(count != 3) {
+   			 switch(count)
+                         {
+                            case 1:
+   				 System.out.println("Enter a value for the length:");
+   				 int length = input.nextInt();
+   				 test_rectangle.setLength(length);
+   				 break;
+   				 
+                            case 2:
+   				 System.out.println("Enter a value for the width");
+   				 int width = input.nextInt();
+   				 test_rectangle.setWidth(width);
+   				 break;
+   				 
+                            case 3:
+   				 break;	 
+   			 }
+   			 
+   			 System.out.printf("%s%n",test_rectangle.Calculations1());
+   		 }
+         }
+    }   
+}
+
+/*OUTPUT:
+
+0.00 is the length 
+0.00 is the width 
+0.00 is the perimeter 
+0.00 is the area
+1) Enter Length
+2) Enter Width
+3) Exit
+1
+Enter a value for the length:
+20
+
+40.00 is the perimeter 
+0.00 is the area
+1) Enter Length
+2) Enter Width
+3) Exit
+2
+Enter a value for the width
+10
+
+60.00 is the perimeter 
+200.00 is the area
+1) Enter Length
+2) Enter Width
+3) Exit
+2
+Enter a value for the width
+30
+Exception in thread "main" java.lang.IllegalArgumentException: For input width:0.0
+	at test_rectangle.Rectangle.setWidth(Rectangle.java:18)
+	at test_rectangle.Test_Rectangle.main(Test_Rectangle.java:32)
+C:\Users\jagat\AppData\Local\NetBeans\Cache\8.2\executor-snippets\run.xml:53: Java returned: 1
+
+8.6
+*/
+
+Savings_Account:
+
+package savings_test;
+public class Savings_Account 
+{
+    static double interestRates()
+    {
+        throw new UnsupportedOperationException("");
+    }
+    
+    private double savingsBalence;
+    static double interestRates;
+    
+    public Savings_Account(double savingsBalence)
+    {
+   	 if(savingsBalence > 0)
+            this.savingsBalence = savingsBalence;    
+    }
+    
+    public void setSavingsBalence(double savingsBalence)
+    {
+   	 if(savingsBalence > 0)
+            this.savingsBalence = savingsBalence;
+    }
+    
+    public double getSavingsBalence() {
+            return savingsBalence;
+    }
+    
+    public static double getInterestRates()
+    {
+   	 return interestRates;
+    }
+    
+    public static void modifyInterestRate(double rate)
+    {
+        interestRates = rate;
+    }
+    
+    public double calculateMonthlyInterest()
+	{
+        double calculateMonthlyInterest = (getSavingsBalence()* getInterestRates())/12;
+        savingsBalence += calculateMonthlyInterest;
+    	return calculateMonthlyInterest;
+	}
+    
+    public double calcTotal() 
+    {
+   	 double calcTotal = calculateMonthlyInterest() + getSavingsBalence();
+   	 return calcTotal; 
+    }
+    
+    public String Balence() 
+    {
+   	 return String.format("%f", calcTotal());
+    }
+}
+
+Savings_Test
+
+package savings_test;
+public class Savings_Test {
+    public static void main(String[] args) {
+         Savings_Account account1 = new Savings_Account( 2000);
+   	 Savings_Account account2 = new Savings_Account( 3000);
+         System.out.println(" \t\tAccount1 \tAccount2");
+         System.out.printf("Base \t\t%.02f\t\t%.02f%n", account1.getSavingsBalence(),account2.getSavingsBalence());
+   	
+   	 for(int counter = 1; counter <= 12; counter++)
+         {
+            Savings_Account.modifyInterestRate(.04);
+            System.out.printf("Month %d \t%.2f\t\t%.2f%n",
+            counter,account1.calcTotal(),account2.calcTotal());
+         }
+          Savings_Account.modifyInterestRate(.05);
+          System.out.printf("Month 13 \t%.2f\t\t%.2f%n",
+          account1.calcTotal(),account2.calcTotal());
+    }
+}
+
+/*OUTPUT:
+ 		Account1 	Account2
+Base 		2000.00		3000.00
+Month 1 	2013.33		3020.00
+Month 2 	2020.04		3030.07
+Month 3 	2026.78		3040.17
+Month 4 	2033.53		3050.30
+Month 5 	2040.31		3060.47
+Month 6 	2047.11		3070.67
+Month 7 	2053.94		3080.91
+Month 8 	2060.78		3091.18
+Month 9 	2067.65		3101.48
+Month 10 	2074.54		3111.82
+Month 11 	2081.46		3122.19
+Month 12 	2088.40		3132.60
+Month 13 	2098.83		3148.24
+*/
