@@ -10,7 +10,6 @@
 #include <stdlib.h>
 #include <string.h> //Import libraries for usage
 #include "set.h"    //Import header file
-#include "list.c"
 #include "list.h"
 
 typedef struct set{ //Define our struct set
@@ -39,7 +38,7 @@ SET *createSet(int maxElts, int(*compare)(), unsigned(*hash)()){ //Creates out s
 
 //O(n)
 void destroySet(SET *sp){
-    for(int i; i < sp -> length; i++)//Destroy every list in table
+    for(int i = 0; i < sp -> length; i++)//Destroy every list in table
         destroyList(sp -> data[i]);
     free(sp -> data);//Free up hash table
     free(sp); //Free set
@@ -51,7 +50,7 @@ int numElements(SET *sp){
 }
 
 //O(1)
-void addElement(SET *sp, void *elt){
+void addElement(SET *sp, void* elt){
     assert(sp != NULL && elt != NULL); //make sure set and elt are not NULL
     unsigned index;
     index = sp -> hash(elt) % sp -> length; //hash key to find address
@@ -60,7 +59,7 @@ void addElement(SET *sp, void *elt){
 }
 
 //O(1)
-void removeElement(SET *sp, void *elt){
+void removeElement(SET *sp, void* elt){
     assert(sp != NULL && elt != NULL);
     unsigned index;
     index = sp -> hash(elt) % sp -> length;
@@ -69,7 +68,7 @@ void removeElement(SET *sp, void *elt){
 }
 
 //O(n)
-void *findElement(SET *sp, void *elt){
+void *findElement(SET *sp, void* elt){
     assert(sp != NULL && elt != NULL);
     unsigned index;
     index = sp -> hash(elt) % sp -> length;

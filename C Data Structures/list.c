@@ -25,8 +25,7 @@ typedef struct node{ //Define out struct node
 
 //O(1)
 LIST *createList(int(*compare)()){ //Creates out set using variables initialized in struct list
-    struct list *lp;
-    lp = malloc(sizeof(struct list)); //Allocate memory for list
+    LIST *lp = malloc(sizeof(struct list)); //Allocate memory for list
     assert(lp != NULL); //Make sure list memory allocation is not NULL
     lp -> count = 0; //Initially set count to 0
     lp -> compare = compare;
@@ -40,14 +39,13 @@ LIST *createList(int(*compare)()){ //Creates out set using variables initialized
 //O(n)
 void destroyList(LIST *lp){
     assert(lp != NULL);
-    NODE *pDel = lp -> head -> prev; //Set pDel to node we want to delete
-    NODE *pPrev;
+    NODE *pDel = lp -> head -> next; //Set pDel to node we want to delete
     while(pDel != lp -> head){ //Starting from first node to last each node is freed
-        pPrev = pDel -> prev;
+        NODE *pNext = pDel -> next;
         free(pDel);
-        pDel = pPrev;
+        pDel = pNext;
     }
-    free(pDel); //Free pDel
+    free(lp -> head); //Free dummy node
     free(lp); //free list
 }
 
@@ -56,35 +54,42 @@ int numItems(LIST *lp){ //Return number of items in list
     return lp -> count;
 }
 
-
 //O(1)
 void addFirst(LIST *lp, void *item){
     NODE *pNew;
-    pNew -> next = lp -> head;
+    pNew = malloc(sizeof(struct node));
+    assert(pNew != NULL);
+    
+    pNew -> data = item;
+    pNew -> next = lp -> head -> next;
     pNew -> prev = lp -> head;
     lp -> head -> next = pNew;
-    if(lp -> count == 0)
-        lp -> head -> prev = pNew;
+    pNew -> next -> prev = pNew;
     lp -> count++; //Add one from count to account for adding an elt
 }
 
 //O(1)
 void addLast(LIST *lp, void *item){
     NODE *pNew;
-    NODE *pPrev = lp -> head -> prev;
+    pNew = malloc(sizeof(struct node));
+    assert(pNew != NULL);
+    
+    pNew -> data = item;
     pNew -> next = lp -> head;
-    pNew -> prev = pPrev;
+    pNew -> prev = lp -> head -> prev;
     lp -> head -> prev = pNew;
-    pPrev -> next = pNew;
+    pNew -> prev -> next = pNew;
     lp -> count++; //Add one from count to account for adding an elt
 }
 
 //O(1)
 void *removeFirst(LIST *lp){
+    if(lp -> count == 0)
+        return NULL;
+    
     NODE *pDel = lp -> head -> next;
-    NODE *pNext = pDel -> next;
-    lp -> head -> next = pNext;
-    pNext -> prev = lp -> head;
+    lp -> head -> next = pDel -> next;
+    pDel -> next -> prev = pDel -> prev;
     void* x = pDel -> data;
     free(pDel);
     lp -> count--; //Subtract one from count to account for deleting an elt
@@ -93,10 +98,12 @@ void *removeFirst(LIST *lp){
 
 //O(1)
 void *removeLast(LIST *lp){
+    if(lp -> count == 0)
+        return NULL;
+    
     NODE *pDel = lp -> head -> prev;
-    NODE *pPrev = pDel -> prev;
-    lp -> head -> next = pPrev;
-    pPrev -> next = lp -> head;
+    lp -> head -> prev = pDel -> prev;
+    pDel -> prev -> next = pDel -> next;
     void* x = pDel -> data;
     free(pDel);
     lp -> count--; //Subtract one from count to account for deleting an elt
@@ -105,24 +112,29 @@ void *removeLast(LIST *lp){
 
 //O(1)
 void *getFirst(LIST *lp){ //Use head next to return first elt
+    assert(lp -> count > 0);
     return lp -> head -> next -> data;
 }
 
 //O(1)
 void *getLast(LIST *lp){ //Use head prev to return first elt
+    assert(lp -> count > 0);
     return lp -> head -> prev -> data;
 }
 
 //O(n)
-void removeItem(LIST *lp, void *item){
+void removeItem(LIST *lp, void* item){
+    if(lp -> count == 0)
+        return;
+    
     NODE *pSearch = lp -> head -> next;
     
-    while(pSearch -> data != NULL){ //Dummy node head has no data
-        if(lp -> compare(pSearch -> data, item) == 0){ // error possibility
-            NODE *pPrev = pSearch -> prev;
+    while(pSearch != NULL){
+        if(lp -> compare(pSearch -> data, item) == 0){
             NODE *pNext = pSearch -> next;
-            pPrev -> next = pNext;
+            NODE *pPrev = pSearch -> prev;
             pNext -> prev = pPrev;
+            pPrev -> next = pNext;
             free(pSearch);
             lp -> count--;
         }else
@@ -131,10 +143,13 @@ void removeItem(LIST *lp, void *item){
 }
 
 //O(n)
-void *findItem(LIST *lp, void *item){
+void *findItem(LIST *lp, void* item){
+    if(lp -> count == 0)
+        return NULL;
+    
     NODE *pSearch = lp -> head -> next;
     
-    while(pSearch -> data != NULL){
+    while(pSearch != lp -> head){
         if(lp -> compare(pSearch -> data, item) == 0)
             return pSearch -> data;
         else
@@ -145,12 +160,12 @@ void *findItem(LIST *lp, void *item){
 
 //O(n)
 void *getItems(LIST *lp){
-    NODE *pSearch = lp -> head -> next;
     void** ret = malloc(sizeof(void*)* lp -> count); //Allocate memory for array size of count
     assert(ret != NULL);
-    int i = 0;
     
-    while(pSearch -> data != NULL){
+    int i = 0;
+    NODE *pSearch = lp -> head -> next;
+    while(pSearch != lp -> head){
         ret[i] = pSearch -> data;
         i++;
         pSearch = pSearch -> next;
