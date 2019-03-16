@@ -1,0 +1,53 @@
+Application 1 Sorted Array
++----------------+--------------------+
+| Sorted Array   | Runtime Complexity |
++----------------+--------------------+
+| createDataSet  | O(n)               |
++----------------+--------------------+
+| destroyDataSet | O(1)               |
++----------------+--------------------+
+| addElement     | O(n)               |
++----------------+--------------------+
+| removeElements | O(n)               |
++----------------+--------------------+
+| maxAgeGap      | O(1)               |
++----------------+--------------------+
+| searchAge      | O(logn)            |
++----------------+--------------------+
+| mybsearch      | O(logn)            |
++----------------+--------------------+
+Application 1
++----------------+--------------------+
+| Hash + Array   | Runtime Complexity |
++----------------+--------------------+
+| createDataSet  | O(n)               |
++----------------+--------------------+
+| destroyDataSet | O(n)               |
++----------------+--------------------+
+| addElement     | O(1)               |
++----------------+--------------------+
+| removeElements | O(1)               |
++----------------+--------------------+
+| maxAgeGap      | O(n)               |
++----------------+--------------------+
+| searchAge      | O(1)               |
++----------------+--------------------+
+Application 2 Unsorted Array
++----------------+--------------------+
+| Unsorted Array | Runtime Complexity |
++----------------+--------------------+
+| createDataSet  | O(n)               |
++----------------+--------------------+
+| destroyDataSet | O(1)               |
++----------------+--------------------+
+| addElement     | O(1)               |
++----------------+--------------------+
+| removeElements | O(1)               |
++----------------+--------------------+
+| searchID       | O(1)               |
++----------------+--------------------+
+
+
+For application 1, I implemented two different data structures. The first is a sorted array which is fast because the adding and removing is O(logn) but shifting makes them O(n). The searching is quite fast, but shifting is what could make this not as efficient for large scale programs. This got me thinking and I thought up my second data structure for application 1: a hash table with each elt pointing to an integer array. This would be O(1) for adding, removing, and searching with no collisions. Although createDataSet, destroyDataSet, and maxAgeGap are O(n), there is a max of 13 iterations for them all so they are all close to O(1) runtime. When I talked to the professor about this implementation, she said although it would be faster, it would be less efficient memory wise. So, I used dynamic sizing for each of the arrays by utilizing the realloc we learned in class and only initialized the hash arrays only if there was an ID being inserted for that age. This saves a lot of memory instead of initializing each has array to sizeof(maxElts). This extra implementation really let me see how important it is to take in all these factors about the memory it takes up and runtime complexity for each function. I realized that sacrifices are needed for what will be the best implementation. For this project, since we aren't handling extremely large amounts of data, the hash+array implementation in my opinion is better due to the considerably faster runtime. However, some large changes would be needed to make it more memory efficient for larger programs.
+
+For application 2, I implemented an unsorted array with an ID to index mapping. I initialized the array to sizeof(maxElts) and for every unique ID that was generated, I simply placed the generated age at (index = ID). This made addElement, removeElement, and searchID to be O(1) which is greatly desired. Since its an unsorted array, deletion is O(1) and the only O(n) operation is createDataSet. This is not too bad since it is only ran once at the beginning.

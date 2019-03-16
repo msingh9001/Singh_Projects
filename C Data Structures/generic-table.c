@@ -97,7 +97,6 @@ void *findElement(SET *sp, void *elt){
 void *getElements(SET *sp){
     assert(sp != NULL);
     int i,j;//initializing counters
-    assert(sp != NULL);
     void** ret = malloc(sizeof(void*)* sp -> count);//Allocate memory the size of count for array ret
     assert(ret != NULL);
     
