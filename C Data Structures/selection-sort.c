@@ -1,7 +1,7 @@
 //
 //  selection-sort.c
 //
-//  Created by Mandeep Singh on 02/21/19.
+//  Created by Mandeep Singh on 03/19/19.
 //  Copyright © 2018 Mandeep Singh. All rights  .
 //
 //Utilizing the selection sort algorithm to sort an integer array
@@ -27,7 +27,7 @@ void selectionSort(int arr[]){
     for(int i = 0; i < NUM_OF_ELEMENTS - 1; i++){
         int smallest = i;
         
-        for(int j = i + 1	; j < NUM_OF_ELEMENTS; j++){
+        for(int j = i + 1; j < NUM_OF_ELEMENTS; j++){
             if(arr[j] < arr[smallest])
                 smallest = j;
         }
