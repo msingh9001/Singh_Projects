@@ -1,0 +1,13 @@
+select * from Student;
+select * from SummerJob;
+select * from Student_Work;
+select name, company from student, (select * from student_work natural join summerjob) j where student.studentid = j.studentid;
+select name, jobid, jobtitle, company from student, (select * from student_work natural join summerjob) j where student.studentid = j.studentid;
+select company, avg(hrlypay) from summerjob group by company;
+select studentid, name from student where student.studentid <> all(select studentid from student_work natural join summerjob);
+select company, avg(hrlypay) as Maxavg from summerjob group by company having avg(hrlypay) >= all (select avg(hrlypay) from summerjob group by company);
+select name, jobid, jobtitle, (j.enddate-j.startdate) As daysWorked from student, (select * from student_work natural join summerjob) j where student.studentid = j.studentid;
+select studentid, name from student where student.studentid <> all(select studentid from student_work natural join summerjob);
+select city, count(city) As NumOfJobs from summerjob group by city;
+select company, city, count(company) As NumOfEmployed from student_work natural join summerjob group by company, city;
+select student.studentid, name from student, (select * from student_work natural join summerjob) j where student.studentid = j.studentid and student.city = j.city;
