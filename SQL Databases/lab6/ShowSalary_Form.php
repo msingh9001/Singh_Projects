@@ -54,7 +54,7 @@ function getTitleFromDB($name){
     }
 function getSalaryFromDB($name){
 	//connect to your database
-	$conn=oci_connect('msingh','Divgeet12', '//dbserver.engr.scu.edu/db11g');
+	$conn=oci_connect('username','password', '//dbserver.engr.scu.edu/db11g');
 	if(!$conn) {
 	     print "<br> connection failed:";
         exit;
