@@ -1,0 +1,1 @@
+CREATE TABLE Supplier(SNO integer,sname varchar(20),city varchar(20));
