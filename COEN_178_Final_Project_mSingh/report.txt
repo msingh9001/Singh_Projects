@@ -1,0 +1,20 @@
+
+                                                                                      Customer Report  June 4, 2020                                                                                     
+                                                                                                                                                                                                        
+ID    Name         Phone      Address           OrderI itemid title              PRICE OrderDate  shippeddat  ItemTotal        Tax ShippingFee GrandTotal                                               
+----- ------------ ---------- ----------------- ------ ------ ------------- ---------- ---------- ---------- ---------- ---------- ----------- ----------                                               
+c001  Bob Duncan   4085159662 1334 First Street o001   item1  Dragonball Z        9.99 01-JUN-20  05-JUN-20       $9.99       $.50        $.00     $10.49                                               
+                              , Saratoga, CA                                                                                                                                                            
+c001  Bob Duncan   4085159662 1334 First Street o004   item9  Spider-man         12.99 03-JUN-20  10-JUN-20      $38.97      $1.95        $.00     $40.92                                               
+                              , Saratoga, CA                                                                                                                                                            
+
+
+
+
+
+
+
+
+
+
+                                                                                     Mandeep Singh COEN 178 Project                                                                                     

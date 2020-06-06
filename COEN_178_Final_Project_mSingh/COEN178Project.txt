@@ -1,0 +1,279 @@
+drop table goldcustomer;
+
+Table dropped.
+
+drop table itemorder;
+
+Table dropped.
+
+drop table comicbook;
+
+Table dropped.
+
+drop table tshirt;
+
+Table dropped.
+
+drop table storeItems;
+
+Table dropped.
+
+drop table customers;
+
+Table dropped.
+
+
+start tables.sql
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+start values.sql
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+start addItemOrder.sql
+
+Procedure created.
+
+No errors.
+
+start updateGold.sql
+
+Trigger created.
+
+No errors.
+
+start setShippingDate.sql
+
+Procedure created.
+
+No errors.
+
+start computeTotal.sql
+
+Function created.
+
+No errors.
+
+start showItemOrders.sql
+
+Procedure created.
+
+No errors.
+
+select * from storeItems;
+
+ITEMID          PRICE                                                           
+---------- ----------                                                           
+item1            9.99                                                           
+item2           19.99                                                           
+item5           24.99                                                           
+item6           15.99                                                           
+item9           12.99                                                           
+
+
+select * from comicbook;
+
+ITEMID     ISBN       TITLE                PUBLISHED NOOFCOPIES                 
+---------- ---------- -------------------- --------- ----------                 
+item1      0019029129 Dragonball Z         19-JAN-19          2                 
+item2      0018240582 Naruto               15-MAY-20          5                 
+item6      0014359302 Iron Man             04-NOV-19         10                 
+item9      0012384958 Spider-man           02-AUG-17          7                 
+
+
+select * from tshirt;
+
+ITEMID          SIZES                                                           
+---------- ----------                                                           
+item5              20                                                           
+
+
+select * from customers;
+
+CUSTID     CUSTTYPE   PHONE      NAME                                           
+---------- ---------- ---------- --------------------                           
+ADDRESS                                                                         
+--------------------------------------------------                              
+c001       regular    4085159662 Bob Duncan                                     
+1334 First Street, Saratoga, CA                                                 
+                                                                                
+c002       regular    4088281912 Ronald McDonald                                
+1125, Main Avenue, Cupertino, CA                                                
+                                                                                
+c003       gold       4086638840 Tony Stark                                     
+2234 Malibu Way, Sunnyvale, CA                                                  
+       
+                                                                         
+select * from goldcustomer;
+
+CUSTID               DATEJOINE                                                  
+-------------------- ---------                                                  
+c003                 13-DEC-12                                                  
+
+
+select * from itemorder;
+
+no rows selected
+
+
+execute addItemOrder('item1', 'c001', 'o001', 1, '1-jun-2020', '8-jun-2020');
+
+PL/SQL procedure successfully completed.
+
+execute addItemOrder('item2', 'c002', 'o002', 2, '2-jun-2020', '9-jun-2020');
+
+PL/SQL procedure successfully completed.
+
+execute addItemOrder('item6', 'c003', 'o003', 4, '2-jun-2020', '9-jun-2020');
+
+PL/SQL procedure successfully completed.
+
+execute addItemOrder('item9', 'c001', 'o004', 3, '3-jun-2020', '10-jun-2020');
+
+PL/SQL procedure successfully completed.
+
+select * from itemorder;
+
+ORDERID    ITEMID     CUSTID     DATEOFORD  NOOFITEMS SHIPPEDDA SHIPPINGFEE     
+---------- ---------- ---------- --------- ---------- --------- -----------     
+o001       item1      c001       01-JUN-20          1 08-JUN-20          10     
+o002       item2      c002       02-JUN-20          2 09-JUN-20          10     
+o003       item6      c003       02-JUN-20          4 09-JUN-20           0     
+o004       item9      c001       03-JUN-20          3 10-JUN-20          10     
+
+
+select * from comicbook;
+
+ITEMID     ISBN       TITLE                PUBLISHED NOOFCOPIES                 
+---------- ---------- -------------------- --------- ----------                 
+item1      0019029129 Dragonball Z         19-JAN-19          1                 
+item2      0018240582 Naruto               15-MAY-20          3                 
+item6      0014359302 Iron Man             04-NOV-19          6                 
+item9      0012384958 Spider-man           02-AUG-17          4                 
+
+
+update customers set custtype = 'gold' where custid = 'c001';
+
+1 row updated.
+
+select * from customers;
+
+CUSTID     CUSTTYPE   PHONE      NAME                                           
+---------- ---------- ---------- --------------------                           
+ADDRESS                                                                         
+--------------------------------------------------                              
+c001       gold       4085159662 Bob Duncan                                     
+1334 First Street, Saratoga, CA                                                 
+                                                                                
+c002       regular    4088281912 Ronald McDonald                                
+1125, Main Avenue, Cupertino, CA                                                
+                                                                                
+c003       gold       4086638840 Tony Stark                                     
+2234 Malibu Way, Sunnyvale, CA                                                  
+                                                                                
+
+select * from itemorder;
+
+ORDERID    ITEMID     CUSTID     DATEOFORD  NOOFITEMS SHIPPEDDA SHIPPINGFEE     
+---------- ---------- ---------- --------- ---------- --------- -----------     
+o001       item1      c001       01-JUN-20          1 08-JUN-20           0     
+o002       item2      c002       02-JUN-20          2 09-JUN-20          10     
+o003       item6      c003       02-JUN-20          4 09-JUN-20           0     
+o004       item9      c001       03-JUN-20          3 10-JUN-20           0     
+
+
+execute setShippingDate('o001', '5-jun-2020');
+
+PL/SQL procedure successfully completed.
+
+select * from itemorder;
+
+ORDERID    ITEMID     CUSTID     DATEOFORD  NOOFITEMS SHIPPEDDA SHIPPINGFEE     
+---------- ---------- ---------- --------- ---------- --------- -----------     
+o001       item1      c001       01-JUN-20          1 05-JUN-20           0     
+o002       item2      c002       02-JUN-20          2 09-JUN-20          10     
+o003       item6      c003       02-JUN-20          4 09-JUN-20           0     
+o004       item9      c001       03-JUN-20          3 10-JUN-20           0    
+
+
+select computeTotal(orderid) from itemorder where orderid = 'o001';
+
+COMPUTETOTAL(ORDERID)                                                           
+---------------------                                                           
+                10.49                                                           
+
+execute showItemOrders('c001', '1-jan-2015');
+
+Customer Information:                                                           
+id: c001                                                                        
+name: Bob Duncan                                                                
+phone: 4085159662                                                               
+address: 1334 First Street, Saratoga, CA                                        
+Order Information:                                                              
+Order id: o001, item id: item1, title: Dragonball Z, price: 9.99, Order date:   
+01-JUN-20, shipping date:   05-JUN-20                                                  
+Payment Details:                                                                
+Item(s) Total: 9.99, Tax: .5, Discount: 0, Shipping Fee: 0, Total: 10.49        
+Order Information:                                                              
+Order id: o004, item id: item9, title: Spider-man, price: 12.99, Order date:    
+03-JUN-20, shipping date:   10-JUN-20                                                 
+Payment Details:                                                                
+Item(s) Total: 38.97, Tax: 1.95, Discount: 0, Shipping Fee: 0, Total: 40.92     
+
+PL/SQL procedure successfully completed.
+
