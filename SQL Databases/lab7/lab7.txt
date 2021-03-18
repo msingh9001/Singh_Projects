@@ -1,0 +1,297 @@
+SQL> start sql1.sql
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+SQL> Create or Replace VIEW CurrentProjects As
+  2  Select projectid, title, managerid from Project7 where endDate < sysdate;
+
+View created.
+
+SQL> drop view CurrentProjects
+  2  ;
+
+View dropped.
+
+SQL> Create or Replace VIEW CurrentProjects As
+  2  Select projectid, title, managerid from Project7 where endDate > sysdate;
+
+View created.
+
+SQL> Create or Replace VIEW PastProjects AS
+  2  Select projectid, title, managerid from Project7 where endDate < sysdate;
+
+View created.
+
+SQL> Select * from CurrentProjects
+  2  ;
+
+no rows selected
+
+SQL> Select * from PastProkects;
+Select * from PastProkects
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> Select * from PastProjects;
+
+PROJE TITLE                MANAG                                                
+----- -------------------- -----                                                
+pj1   Research             e1                                                   
+pj2   Research             e2                                                   
+pj3   Research             e3                                                   
+pj4   Research             e4                                                   
+
+SQL> insert into CurrentProjects values ('p99','Testing','e2');
+
+1 row created.
+
+SQL> select * from Project7
+  2  ;
+
+PROJE TITLE                    BUDGET STARTDATE ENDDATE   MANAG                 
+----- -------------------- ---------- --------- --------- -----                 
+pj1   Research                1000000 10-JAN-19 20-FEB-20 e1                    
+pj2   Research                 100000 10-FEB-19 20-APR-19 e2                    
+pj3   Research                1000000 10-MAR-19 20-APR-20 e3                    
+pj4   Research                 100000 10-MAY-19 20-JUL-19 e4                    
+p99   Testing                                             e2                    
+
+SQL> insert into PastProjects values ('Testing','e2');
+insert into PastProjects values ('Testing','e2')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> Create or Replace VIEW AS ManagedProjects
+  2  Select Project7.projectID, Project7.title AS Project_Title, Emp7.empName AS Manager_Name
+  3  From Project7, Emp7 where Emp7.empid = Project7.managerId;
+Create or Replace VIEW AS ManagedProjects
+                       *
+ERROR at line 1:
+ORA-00999: invalid view name 
+
+
+SQL> Create or Replace VIEW ManagedProjects AS
+  2  Select Project7.projectID, Project7.title AS Project_Title, Emp7.empName AS Manager_Name
+  3  From Project7, Emp7 where Emp7.empid = Project7.managerId;
+
+View created.
+
+SQL> Select * from ManagedProjects;
+
+PROJE PROJECT_TITLE        MANAGER_NAME                                         
+----- -------------------- --------------------                                 
+pj1   Research             J.Smith                                              
+p99   Testing              M.Jones                                              
+pj2   Research             M.Jones                                              
+pj3   Research             D.Clark                                              
+pj4   Research             C.Johnson                                            
+
+SQL> insert into ManagedProjects values ('p88','Design','Mary Mason');
+insert into ManagedProjects values ('p88','Design','Mary Mason')
+*
+ERROR at line 1:
+ORA-01776: cannot modify more than one base table through a join view 
+
+
+SQL> Create table ItemOrder (orderNo VARCHAR(5) Primary key, qty Integer);
+
+Table created.
+
+SQL> start psql1.sql
+
+Trigger created.
+
+No errors.
+SQL> Insert into ItemOrder values ('o1',100);
+Insert into ItemOrder values ('o1',100)
+            *
+ERROR at line 1:
+ORA-04091: table MSINGH.ITEMORDER is mutating, trigger/function may not see it 
+ORA-06512: at "MSINGH.ITEMORDER_AFTER_INSERT_TRIG", line 4 
+ORA-04088: error during execution of trigger 
+'MSINGH.ITEMORDER_AFTER_INSERT_TRIG' 
+
+
+SQL> start sql2.sql
+
+Table created.
+
+
+Table created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+SQL> start psql2.sql
+
+Trigger created.
+
+No errors.
+SQL> insert into Course_Prereq values (121,11);
+
+1 row created.
+
+SQL> insert into Course_Prereq values (121,10);
+
+1 row created.
+
+SQL> insert into Course_Prereq values (121,12);
+insert into Course_Prereq values (121,12)
+            *
+ERROR at line 1:
+ORA-20000: Only   2   prereqs   for course 
+ORA-06512: at "MSINGH.LIMITTEST", line 13 
+ORA-04088: error during execution of trigger 'MSINGH.LIMITTEST' 
+
+
+SQL> select* from Course_PreReq
+  2  ;
+
+  COURSENO   PREREQNO                                                           
+---------- ----------                                                           
+       121         11                                                           
+       121         10                                                           
+
+SQL> insert into Course_Prereq values (121,12);
+insert into Course_Prereq values (121,12)
+            *
+ERROR at line 1:
+ORA-20000: Only   2   prereqs   for course 
+ORA-06512: at "MSINGH.LIMITTEST", line 13 
+ORA-04088: error during execution of trigger 'MSINGH.LIMITTEST' 
+
+
+SQL> select* from Course_PreReq;
+
+  COURSENO   PREREQNO                                                           
+---------- ----------                                                           
+       121         11                                                           
+       121         10                                                           
+
+SQL> insert into Course_Prereq values (133,12);
+
+1 row created.
+
+SQL> select* from Course_PreReq;
+
+  COURSENO   PREREQNO                                                           
+---------- ----------                                                           
+       121         11                                                           
+       121         10                                                           
+       133         12                                                           
+
+SQL> update COURSE_PREREQ set courseno = 121 where courseno= 133;
+update COURSE_PREREQ set courseno = 121 where courseno= 133
+       *
+ERROR at line 1:
+ORA-04091: table MSINGH.COURSE_PREREQ is mutating, trigger/function may not see 
+it 
+ORA-06512: at "MSINGH.LIMITTEST", line 6 
+ORA-04088: error during execution of trigger 'MSINGH.LIMITTEST' 
+
+
+SQL> Delete from Course_Prereq;
+
+3 rows deleted.
+
+SQL> start psql3.sql
+
+Warning: Trigger created with compilation errors.
+
+SQL> start psql3.sql
+
+Trigger created.
+
+SQL> start psql3.sql
+
+Trigger created.
+
+No errors.
+SQL> insert into Course_Prereq values (121,11);
+
+1 row created.
+
+SQL> insert into Course_Prereq values (121,10);
+
+1 row created.
+
+SQL> insert into Course_Prereq values (121,12);
+insert into Course_Prereq values (121,12)
+            *
+ERROR at line 1:
+ORA-20000: Only 2 prereqs for course 
+ORA-06512: at "MSINGH.LIMITTEST", line 16 
+ORA-04088: error during execution of trigger 'MSINGH.LIMITTEST' 
+
+
+SQL> insert into Course_Prereq values (133,12);
+
+1 row created.
+
+SQL> update COURSE_PREREQ set courseno = 121 where courseno= 133;
+update COURSE_PREREQ set courseno = 121 where courseno= 133
+       *
+ERROR at line 1:
+ORA-20000: Only 2 prereqs for course 
+ORA-06512: at "MSINGH.LIMITTEST", line 16 
+ORA-04088: error during execution of trigger 'MSINGH.LIMITTEST' 
+
+
+SQL> select* from Course_Prereq;
+
+  COURSENO   PREREQNO                                                           
+---------- ----------                                                           
+       121         11                                                           
+       121         10                                                           
+       133         12                                                           
+
+SQL> spool off

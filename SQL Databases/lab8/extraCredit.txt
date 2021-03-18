@@ -1,0 +1,11 @@
+SQL> select * from MovieReviews;
+
+MOVIENAME                 COMMENTS                                              
+------------------------- ----------------------------------------              
+Cars                      good                                                  
+Cars                      very good                                             
+Cars                      excellent                                             
+Battle: Los Angeles       very good action                                      
+Transformers              classic                                               
+
+SQL> spool off

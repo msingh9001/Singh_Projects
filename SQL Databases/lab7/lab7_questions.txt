@@ -1,0 +1,20 @@
+PART 1
+1
+C)Yes, they work
+D)StartDate and EndDate are Null
+E)There is a not enough values error.
+H)No, cannot modify more than one base table through a join view
+PART 2
+
+PART 3
+4
+A)No, error during execution of trigger since table is mutating and trigger may not see it
+5
+A)There could be multiple pre reqs and also it is easier to edit any pre reqs
+B)No, there is a limit of only 2 prereqs for the course so a third could not be added
+C)There are 2 rows
+D)There are now 3 rows
+E)The LIMITTEST error appears again. The row was not inserted and there was a mutation error.
+6
+A)Yes it is enforced
+B)The only 2 prerequisites for this course error comes up so the constraint is enforced

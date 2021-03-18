@@ -1,0 +1,66 @@
+Mandeep Singh
+Question 8
+
+SQL> start tables.sql
+
+Table created.
+
+
+Table created.
+
+SQL> start values.sql
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+SQL> start query.sql
+
+EM   OFFICENO                                                                   
+-- ----------                                                                   
+E1         10                                                                   
+E2         10                                                                   
+E3         12                                                                   
+E4         12                                                                   
+E5         15                                                                   
+
+
+EM PH                                                                           
+-- --                                                                           
+E1 P1                                                                           
+E2 P2                                                                           
+E3 P3                                                                           
+E4 P3                                                                           
+E5 P5                                                                           
+
+
+  OFFICENO                                                                      
+----------                                                                      
+        10                                                                      
+
+SQL> spool off

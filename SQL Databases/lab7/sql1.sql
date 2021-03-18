@@ -1,0 +1,12 @@
+insert into EMP7 values ('e1','J.Smith','d1',100000);
+insert into EMP7 values ('e2','M.Jones','d1',120000);
+insert into EMP7 values ('e3','D.Clark','d2',200000);
+insert into EMP7 values ('e4','C.Johnson','d1',120000);
+insert into EMP7 values ('e5','W.Greenwalt','d2',200000);
+insert into  Project7 values ('pj1','Research', 1000000, '10-Jan-2019','20-Feb-2020','e1');
+insert into  Project7 values ('pj2','Research', 100000, '10-Feb-2019','20-Apr-2019','e2');
+insert into  Project7 values ('pj3','Research', 1000000, '10-Mar-2019','20-Apr-2020','e3');
+insert into  Project7 values ('pj4','Research', 100000, '10-May-2019','20-Jul-2019','e4');
+insert into  EMP_Project values ('pj2','e2',10000);
+insert into  EMP_Project values ('pj4','e1',10000);
+insert into  EMP_Project values ('pj3','e4',10000);

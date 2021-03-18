@@ -1,0 +1,77 @@
+Mandeep Singh
+Extra Credit
+
+SQL> start tables.sql
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+SQL> start values.sql
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+SQL> start query.sql
+
+BO TITLE                AUTHOR                                                  
+-- -------------------- --------------------                                    
+b1 Book1                Author1                                                 
+b2 Book2                Author2                                                 
+b3 Book3                Author3                                                 
+
+
+AP ANAME                                                                        
+-- ----------                                                                   
+s1 name1                                                                        
+s2 name2                                                                        
+s3 name3                                                                        
+
+
+AP BO                                                                           
+-- --                                                                           
+s1 b1                                                                           
+s1 b2                                                                           
+s2 b1                                                                           
+s2 b2                                                                           
+s2 b3                                                                           
+
+
+ANAME                                                                           
+----------                                                                      
+name2                                                                           
+
+SQL> spool off

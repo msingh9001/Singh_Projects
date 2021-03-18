@@ -1,0 +1,21 @@
+
+                                             Employee Listing  May 18, 2020                                             
+                                                                                                                        
+Name                 Depar        Salary                                                                                
+-------------------- ----- -------------                                                                                
+J.Smith              d1         $100,000                                                                                
+M.Jones              d1         $120,000                                                                                
+D.Clark              d2         $200,000                                                                                
+C.Johnson            d1         $120,000                                                                                
+W.Greenwalt          d2         $200,000                                                                                
+
+
+
+
+
+
+
+
+
+                                                     COEN 178 Lab-7                                                     
+
